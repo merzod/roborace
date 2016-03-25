@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="logs.location" value="logs"/>
+
+    <appender name="2D" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logs.location}/2d.log</file>
+        <append>false</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${logs.location}/agent_%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <!-- save history for 1 previous day -->
+            <maxHistory>1</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 10MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level [%-25thread] %class:%line %method - %message%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="UTILS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logs.location}/utils.log</file>
+        <append>false</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${logs.location}/agent_%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <!-- save history for 1 previous day -->
+            <maxHistory>1</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 10MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level [%-25thread] %class:%line %method - %message%n</pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="2D"/>
+    </root>
+    <logger name="com.merzod.engine2d.utils" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="UTILS"/>
+    </logger>
+
+</configuration>
