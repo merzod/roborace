@@ -58,6 +58,12 @@ public class LineUtilsTest extends TestCase {
         assertEquals(10, (int)line.getEnd().getY());
     }
 
+    public void testToDecart() throws Exception {
+        Point p = LineUtils.toDecart(10, Math.toRadians(90));
+        assertEquals(0, (int)p.getX());
+        assertEquals(10, (int)p.getY());
+    }
+
     public void testShiftPoint() throws Exception {
         Point p = new Point(0,0);
         LineUtils.shiftPoint(p, new Point(10, 10));
